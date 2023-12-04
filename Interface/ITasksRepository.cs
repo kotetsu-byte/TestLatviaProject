@@ -6,9 +6,9 @@ namespace TestLatviaProject.Interface
     {
         Task<IEnumerable<Tasks>> GetAllTasks();
         Task<Tasks> GetTaskById(int id);
-        bool Create(Tasks tasks);
-        bool Update(Tasks tasks);
-        bool Delete(int id);
-        bool Save();
+        Task<bool> Create(Tasks tasks);
+        Task<bool> Update(Tasks tasks);
+        Task<bool> Delete(int id);
+        Task<bool> Save();
     }
 }

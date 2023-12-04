@@ -1,0 +1,43 @@
+﻿@using TestLatviaProject.Dtos
+@model UserAdminDto
+
+<form method="post" asp-action="Create" asp-controller="UserAdmin">
+    <div class="form-group">
+        <label asp-for="UserName">User</label>
+        <select asp-for="UserName" class="form-control" asp-items="@Model.UsersList">
+            <option disabled selected>--Select User--</option>
+        </select>
+    </div>
+    <table class="table">
+        <tr>
+            <th>Check</th>
+            <th>Task</th>
+        </tr>
+        @foreach(var item in Model.AllTasks)
+        {
+            <tr>
+                <td><input class="check-@item.Id" type="checkbox" onclick="addToTask('@item.Title', @item.Id)" /></td>
+                <td>@item.Title</td>
+            </tr>
+        }
+    </table>
+    <input type="hidden" id="selectedTasks" asp-for="TasksTitle" />
+    <br />
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+<script>
+    let arr = [];
+    function addToTask(str, id)
+    {
+        let check = document.querySelector(`.check-${id}`);
+        
+        if (check.checked) {
+            arr.push(str);
+        } else {
+            arr = arr.filter(item => item != str);
+        }
+        console.log(arr);
+        document.querySelector('#selectedTasks').value = arr;
+    }
+</script>

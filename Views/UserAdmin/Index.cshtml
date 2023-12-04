@@ -1,0 +1,71 @@
+﻿@using TestLatviaProject.Dtos
+@using TestLatviaProject.Interface
+@using Microsoft.AspNetCore.Identity;
+@model List<UserAdminDto>
+@inject IUserAdminRepository _userAdminRepository
+@inject UserManager<User> _userManager
+
+@{
+    var userAdminDto = new UserAdminDto();
+    var users = await _userAdminRepository.GetAllUsers();
+    List<SelectListItem> usersList = new List<SelectListItem>();
+    foreach (var item in users)
+    {
+        if(await _userManager.IsInRoleAsync(item, "User"))
+        usersList.Add(new SelectListItem()
+        {
+            Value = item.UserName,
+            Text = item.UserName
+        });
+    }
+    userAdminDto.UsersList = usersList;
+}
+
+
+<table class="table">
+    <tr>
+        <th>User Name</th>
+        <th>Tasks</th>
+        <th>Details</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr class="display-all">
+            <td class="display-username">@item.UserName</td>
+            <td>@string.Join(", ", item.TasksTitle)</td>
+            <td><button onclick="location.pathname = '@Url.Action("Details", "UserAdmin", new {id = item.Id})'">Details</button></td>
+            <td><button onclick="location.pathname = '@Url.Action("Update", "UserAdmin", new {id = item.Id})'">Edit</button></td>
+            <td><button onclick="location.pathname = '@Url.Action("Delete", "UserAdmin", new {id = item.Id})'">Delete</button></td>
+        </tr>
+    }
+</table>
+    
+<div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+    <button onclick="location.pathname = '@Url.Action("Create", "UserAdmin")'">Create</button>
+
+    <select asp-items="userAdminDto.UsersList" onchange="displayCurrent(this.options[this.selectedIndex].innerHTML)" class="form-select-sm">
+        <option>All</option>
+    </select>
+</div>
+
+<script>
+    function displayCurrent(val)
+    {
+        console.log(val);
+        let displayAll = document.querySelectorAll('.display-all');
+        let displayUsername = document.querySelectorAll('.display-username');
+        displayUsername.forEach(elem => {
+            if (elem.innerHTML === val) {
+                elem.parentNode.style.display = "table-row";
+            } else if (val === "All") {
+                displayAll.forEach(node => {
+                    node.style.display = "table-row";
+                });
+            } else {
+                elem.parentNode.style.display = "none";
+            }
+        })
+    }
+</script>

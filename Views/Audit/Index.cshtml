@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Audit>
+
+<table class="table">
+    <tr>
+        <th>Username</th>
+        <th>AuditType</th>
+        <th>TableName</th>
+        <th>Date & time</th>
+        <th>Primary key</th>
+        <th>Old values</th>
+        <th>New values</th>
+        <th>Affected columns</th>
+    </tr>
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>@item.UserName</td>
+            <td>@item.AuditType</td>
+            <td>@item.TableName</td>
+            <td>@item.DateTime</td>
+            <td>@item.PrimaryKey</td>
+            <td>@item.OldValues</td>
+            <td>@item.NewValues</td>
+            <td>@item.AffectedColumns</td>
+        </tr>
+    }
+</table>

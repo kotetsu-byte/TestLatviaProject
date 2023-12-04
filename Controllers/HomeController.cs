@@ -22,7 +22,5 @@ namespace TestLatviaProject.Controllers
         {
             return View();
         }
-
-        
     }
 }

@@ -1,17 +1,31 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TestLatviaProject.Data;
 using TestLatviaProject.Interface;
+using TestLatviaProject.Models;
 using TestLatviaProject.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<ITasksRepository, TasksRepository>();
+builder.Services.AddScoped<IUserAdminRepository, UserAdminRepository>();
+builder.Services.AddScoped<IAuditRepository, AuditRepository>();
 builder.Services.AddDbContext<TestDBContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 1;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+});
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<TestDBContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

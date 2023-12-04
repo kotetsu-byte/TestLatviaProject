@@ -1,17 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TestLatviaProject.Interface;
 using TestLatviaProject.Models;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace TestLatviaProject.Controllers
 {
     public class TasksController : Controller
     {
         private readonly ITasksRepository _tasksRepository;
-        
-
-        public TasksController(ITasksRepository tasksRepository)
+        private readonly UserManager<User> _userManager;
+        public TasksController(ITasksRepository tasksRepository, UserManager<User> userManager, IHttpContextAccessor contextAccessor)
         {
             _tasksRepository = tasksRepository;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
@@ -26,16 +28,15 @@ namespace TestLatviaProject.Controllers
 
             return View(task);
         }
-
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Tasks task)
+        public async Task<IActionResult> Create(Tasks task)
         {
-            _tasksRepository.Create(task);
+            await _tasksRepository.Create(task);
             return RedirectToAction("Index");
         }
 
