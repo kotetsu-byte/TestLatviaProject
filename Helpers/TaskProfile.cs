@@ -10,6 +10,8 @@ namespace TestLatviaProject.Helpers
         {
             CreateMap<UserAdmin, UserAdminDto>();
             CreateMap<UserAdminDto, UserAdmin>();
+            CreateMap<Tasks, TasksDto>();
+            CreateMap<TasksDto, Tasks>();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TestLatviaProject.Interface;
 using TestLatviaProject.Models;
@@ -17,6 +18,198 @@ namespace TestLatviaProject.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {            
             base.OnModelCreating(builder);
+
+            // Roles
+            builder.Entity<IdentityRole>()
+                .HasData(new IdentityRole { Id = "1", Name = "Admin", NormalizedName = "ADMIN" });
+            builder.Entity<IdentityRole>()
+                .HasData(new IdentityRole { Id = "2", Name = "Manager", NormalizedName = "MANAGER" });
+            builder.Entity<IdentityRole>()
+                .HasData(new IdentityRole { Id = "3", Name = "User", NormalizedName = "USER" });
+
+            var hasher = new PasswordHasher<User>();
+
+            // Users
+            builder.Entity<User>()
+                .HasData(
+                    new User
+                    {
+                        Id = "1",
+                        UserName = "test_admin",
+                        NormalizedUserName = "TEST_ADMIN",
+                        PasswordHash = hasher.HashPassword(null, "admin")
+                    }
+                );
+
+            builder.Entity<User>()
+                .HasData(
+                    new User
+                    {
+                        Id = "2",
+                        UserName = "test_manager_1",
+                        NormalizedUserName = "TEST_MANAGER_1",
+                        PasswordHash = hasher.HashPassword(null, "manager_1")
+                    }
+                );
+
+            builder.Entity<User>()
+                .HasData(
+                    new User
+                    {
+                        Id = "3",
+                        UserName = "test_manager_2",
+                        NormalizedUserName = "TEST_MANAGER_2",
+                        PasswordHash = hasher.HashPassword(null, "manager_2")
+                    }
+                );
+
+            builder.Entity<User>()
+                .HasData(
+                    new User
+                    {
+                        Id = "4",
+                        UserName = "test_manager_3",
+                        NormalizedUserName = "TEST_MANAGER_3",
+                        PasswordHash = hasher.HashPassword(null, "manager_3")
+                    }
+                );
+
+            builder.Entity<User>()
+                .HasData(
+                    new User
+                    {
+                        Id = "5",
+                        UserName = "test_user_1",
+                        NormalizedUserName = "TEST_USER_1",
+                        PasswordHash = hasher.HashPassword(null, "user_1")
+                    }
+                );
+
+            builder.Entity<User>()
+                .HasData(
+                    new User
+                    {
+                        Id = "6",
+                        UserName = "test_user_2",
+                        NormalizedUserName = "TEST_USER_2",
+                        PasswordHash = hasher.HashPassword(null, "user_2")
+                    }
+                );
+
+            builder.Entity<User>()
+                .HasData(
+                    new User
+                    {
+                        Id = "7",
+                        UserName = "test_user_3",
+                        NormalizedUserName = "TEST_USER_3",
+                        PasswordHash = hasher.HashPassword(null, "user_3")
+                    }
+                );
+
+            builder.Entity<User>()
+                .HasData(
+                    new User
+                    {
+                        Id = "8",
+                        UserName = "test_user_4",
+                        NormalizedUserName = "TEST_USER_4",
+                        PasswordHash = hasher.HashPassword(null, "user_4")
+                    }
+                );
+
+            builder.Entity<User>()
+                .HasData(
+                    new User
+                    {
+                        Id = "9",
+                        UserName = "test_user_5",
+                        NormalizedUserName = "TEST_USER_5",
+                        PasswordHash = hasher.HashPassword(null, "user_5")
+                    }
+                );
+
+            // Roles and Users Realtionship
+            builder.Entity<IdentityUserRole<string>>()
+                .HasData(
+                new IdentityUserRole<string>
+                {
+                    RoleId = "1",
+                    UserId = "1"
+                }
+                );
+
+            builder.Entity<IdentityUserRole<string>>()
+                .HasData(
+                new IdentityUserRole<string>
+                {
+                    RoleId = "2",
+                    UserId = "2"
+                }
+                );
+
+            builder.Entity<IdentityUserRole<string>>()
+                .HasData(
+                new IdentityUserRole<string>
+                {
+                    RoleId = "2",
+                    UserId = "3"
+                }
+                );
+
+            builder.Entity<IdentityUserRole<string>>()
+                .HasData(
+                new IdentityUserRole<string>
+                {
+                    RoleId = "2",
+                    UserId = "4"
+                }
+                );
+
+            builder.Entity<IdentityUserRole<string>>()
+                .HasData(
+                new IdentityUserRole<string>
+                {
+                    RoleId = "3",
+                    UserId = "5"
+                }
+                );
+
+            builder.Entity<IdentityUserRole<string>>()
+                .HasData(
+                new IdentityUserRole<string>
+                {
+                    RoleId = "3",
+                    UserId = "6"
+                }
+                );
+
+            builder.Entity<IdentityUserRole<string>>()
+                .HasData(
+                new IdentityUserRole<string>
+                {
+                    RoleId = "3",
+                    UserId = "7"
+                }
+                );
+
+            builder.Entity<IdentityUserRole<string>>()
+                .HasData(
+                new IdentityUserRole<string>
+                {
+                    RoleId = "3",
+                    UserId = "8"
+                }
+                );
+
+            builder.Entity<IdentityUserRole<string>>()
+                .HasData(
+                new IdentityUserRole<string>
+                {
+                    RoleId = "3",
+                    UserId = "9"
+                }
+                );
         }
 
         public virtual async Task<int> SaveChangesAsync(string? userName = null)

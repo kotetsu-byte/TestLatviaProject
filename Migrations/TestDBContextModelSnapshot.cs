@@ -47,6 +47,26 @@ namespace TestLatviaProject.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            Name = "Manager",
+                            NormalizedName = "MANAGER"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -134,6 +154,53 @@ namespace TestLatviaProject.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "1",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            UserId = "2",
+                            RoleId = "2"
+                        },
+                        new
+                        {
+                            UserId = "3",
+                            RoleId = "2"
+                        },
+                        new
+                        {
+                            UserId = "4",
+                            RoleId = "2"
+                        },
+                        new
+                        {
+                            UserId = "5",
+                            RoleId = "3"
+                        },
+                        new
+                        {
+                            UserId = "6",
+                            RoleId = "3"
+                        },
+                        new
+                        {
+                            UserId = "7",
+                            RoleId = "3"
+                        },
+                        new
+                        {
+                            UserId = "8",
+                            RoleId = "3"
+                        },
+                        new
+                        {
+                            UserId = "9",
+                            RoleId = "3"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -210,20 +277,14 @@ namespace TestLatviaProject.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int?>("UserAdminId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
                     b.HasIndex("UserAdminId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Tasks");
                 });
@@ -252,10 +313,6 @@ namespace TestLatviaProject.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -294,6 +351,134 @@ namespace TestLatviaProject.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "8fcc8ed1-9038-4f78-b777-65b83e55e3ec",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "TEST_ADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKvzH9sY3vdguQUJA1bA6vEdKpNacbkaAAmq53/pcQvCgWTzSU/1L0izCTTjdMNOoQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "e1ccf200-7f61-4370-a099-04a1fcf74039",
+                            TwoFactorEnabled = false,
+                            UserName = "test_admin"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "282c2d40-3b54-4e59-9e07-e387cfa99dca",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "TEST_MANAGER_1",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJW0vFn6ArKODfUxztLJW5r+vv5Jwd9VWFYsxhNxDnzayyChIr1m9XVVk2IAknSpSA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "ec53fe56-d5da-4063-b053-cff2374f626d",
+                            TwoFactorEnabled = false,
+                            UserName = "test_manager_1"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "c592e3a4-bf08-4849-83a8-dcd8b1763b76",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "TEST_MANAGER_2",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPGBtLESA7FeUNb2r9MCUG0UIyunCvgoP8Fq//iik8MMZTqCalEbFevWW1OTahWF3w==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "ceae3402-c467-4323-b420-919bb355aae5",
+                            TwoFactorEnabled = false,
+                            UserName = "test_manager_2"
+                        },
+                        new
+                        {
+                            Id = "4",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b2ec0aad-478e-4a49-b89e-499b961fbe95",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "TEST_MANAGER_3",
+                            PasswordHash = "AQAAAAIAAYagAAAAEM8kieHPXKWA3BC3p4aCX1xjBu7XXPvb+tiad/6IS4ot5B1SidOLmKbqcXsUGzFVvg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "435244ab-c558-4b9e-9341-10a0026d5945",
+                            TwoFactorEnabled = false,
+                            UserName = "test_manager_3"
+                        },
+                        new
+                        {
+                            Id = "5",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "bd7de7ef-0021-45f1-9783-f0faf812fd9c",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "TEST_USER_1",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMaNszHEVO9Ozolaq/iC/X1RtIBSDznMkuxH6E3u5hXhG0V99j6EyEOv/qGsAvY6xQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "02e581cb-048f-45e6-9bcc-1c7d934e39d2",
+                            TwoFactorEnabled = false,
+                            UserName = "test_user_1"
+                        },
+                        new
+                        {
+                            Id = "6",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a4f180a4-1d8a-4de2-98d6-b3e94a54ed3f",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "TEST_USER_2",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAvzeMGR40EwtCEUCeYRVh5KVAUHfvqiiAsQhsKtePqWQn/uj+Yu2aQdopUjW7XQBA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "811f0583-f915-4bd9-b573-cfc2c9015332",
+                            TwoFactorEnabled = false,
+                            UserName = "test_user_2"
+                        },
+                        new
+                        {
+                            Id = "7",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "51275aee-a1df-4769-a8b4-01cfcafc8335",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "TEST_USER_3",
+                            PasswordHash = "AQAAAAIAAYagAAAAELUJ71LZtdEvDDtIy6t8ryFrlfv6JSdCjXCCRrgB+N8XV91VNXuYUgRuUXwCPQPX/A==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2f559ed9-7b6a-4060-9dd0-4cfa6f72be67",
+                            TwoFactorEnabled = false,
+                            UserName = "test_user_3"
+                        },
+                        new
+                        {
+                            Id = "8",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "6ae2317a-8087-477d-b46c-13a149ab8610",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "TEST_USER_4",
+                            PasswordHash = "AQAAAAIAAYagAAAAENm9I6fVg25PxEWUAiwLyLUbII2bjmGqBuvriFC8z+60Ihl9t/TLmDXhe1d/Lln5xQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "a62dba22-fcfd-4e51-86a0-e69ab0c0a36c",
+                            TwoFactorEnabled = false,
+                            UserName = "test_user_4"
+                        },
+                        new
+                        {
+                            Id = "9",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "5334936a-0ed4-4bb3-ac2c-3d5d1ade24fb",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "TEST_USER_5",
+                            PasswordHash = "AQAAAAIAAYagAAAAED2AFunS1SwgnGslCS7WntWtLvF630rmWKwbqVzCjrq5kPCnGJStqzY9Z01UZ13wBg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "8e4be131-51e7-48e4-a7cd-dec9cb4b8dc5",
+                            TwoFactorEnabled = false,
+                            UserName = "test_user_5"
+                        });
                 });
 
             modelBuilder.Entity("TestLatviaProject.Models.UserAdmin", b =>
@@ -376,10 +561,6 @@ namespace TestLatviaProject.Migrations
                     b.HasOne("TestLatviaProject.Models.UserAdmin", null)
                         .WithMany("AllTasks")
                         .HasForeignKey("UserAdminId");
-
-                    b.HasOne("TestLatviaProject.Models.User", null)
-                        .WithMany("Tasks")
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("TestLatviaProject.Models.UserAdmin", b =>
@@ -389,11 +570,6 @@ namespace TestLatviaProject.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("TestLatviaProject.Models.User", b =>
-                {
-                    b.Navigation("Tasks");
                 });
 
             modelBuilder.Entity("TestLatviaProject.Models.UserAdmin", b =>

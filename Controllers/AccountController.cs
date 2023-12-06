@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
+using Microsoft.VisualBasic;
 using TestLatviaProject.Models;
 using TestLatviaProject.View_Models;
 
@@ -40,54 +41,8 @@ namespace TestLatviaProject.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+            ViewData["Invalid"] = "Inserted data is invalid";
             return View(loginViewModel);
-        }
-
-        public async Task<IActionResult> Register()
-        {
-            RegisterVM registerVM = new RegisterVM();
-            await _roleManager.CreateAsync(new IdentityRole("Admin"));
-            await _roleManager.CreateAsync(new IdentityRole("Manager"));
-            await _roleManager.CreateAsync(new IdentityRole("User"));
-            List<SelectListItem> selectListItems = new List<SelectListItem>();
-            selectListItems.Add(new SelectListItem()
-            {
-                Value = "Admin",
-                Text = "Admin"
-            });
-            selectListItems.Add(new SelectListItem()
-            {
-                Value = "Manager",
-                Text = "Manager"
-            });
-            selectListItems.Add(new SelectListItem()
-            {
-                Value = "User",
-                Text = "User"
-            });
-            registerVM.RoleList = selectListItems;
-            return View(registerVM);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Register(RegisterVM registerVM)
-        {
-            var user = new User { Name = registerVM.Name, UserName = registerVM.UserName, Email = registerVM.Email };
-            var result = await _userManager.CreateAsync(user, registerVM.Password);
-            if (result.Succeeded)
-            {
-                if(registerVM.RoleSelected != null && registerVM.RoleSelected.Length > 0)
-                {
-                    await _userManager.AddToRoleAsync(user, registerVM.RoleSelected);
-                } else
-                {
-                    await _userManager.AddToRoleAsync(user, "User");
-                }
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Login");
-            }
-
-            return View(registerVM);
         }
 
         [HttpPost]

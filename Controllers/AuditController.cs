@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TestLatviaProject.Interface;
 
 namespace TestLatviaProject.Controllers
 {
+    [Authorize]
     public class AuditController : Controller
     {
         private readonly IAuditRepository _auditRepository;

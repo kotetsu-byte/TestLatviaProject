@@ -23,7 +23,7 @@
     </table>
     <input type="hidden" id="selectedTasks" asp-for="TasksTitle" />
     <br />
-    <button class="btn btn-primary" type="submit">Submit</button>
+    <button class="btn btn-primary" id="submit-btn" type="submit"disabled>Submit</button>
 </form>
 
 <script>
@@ -37,5 +37,13 @@
         }
         console.log(arr);
         document.querySelector('#selectedTasks').value = arr;
+        checkIfEmpty();
+    }
+    function checkIfEmpty() {
+        if (arr.length === 0) {
+            document.querySelector("#submit-btn").disabled = true;
+        } else {
+            document.querySelector("#submit-btn").disabled = false;
+        }
     }
 </script>

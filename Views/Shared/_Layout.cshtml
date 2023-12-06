@@ -25,13 +25,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
                         @if(signInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="#">Hello @userManager.GetUserName(User)</a>
+                                <sapn class="nav-link text-dark">Hello @userManager.GetUserName(User)</sapn>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Tasks" asp-action="Index">Tasks</a>
@@ -52,9 +49,6 @@
                             </li>
                         } else
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-                            </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                             </li>

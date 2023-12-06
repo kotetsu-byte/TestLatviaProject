@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,6 +9,7 @@ using TestLatviaProject.Models;
 
 namespace TestLatviaProject.Controllers
 {
+    [Authorize]
     public class UserAdminController : Controller
     {
         private readonly IUserAdminRepository _userAdminRepository;
