@@ -1,15 +1,21 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TestLatviaProject.Data;
+using TestLatviaProject.Dtos;
 using TestLatviaProject.Interface;
 using TestLatviaProject.Models;
 using TestLatviaProject.Repository;
+using TestLatviaProject.Validations;
+using TestLatviaProject.View_Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<IValidator<LoginVM>, LoginValidation>();
+builder.Services.AddScoped<IValidator<TasksDto>, TasksValidation>();
 builder.Services.AddScoped<ITasksRepository, TasksRepository>();
 builder.Services.AddScoped<IUserAdminRepository, UserAdminRepository>();
 builder.Services.AddScoped<IAuditRepository, AuditRepository>();
