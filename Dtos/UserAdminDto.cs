@@ -6,9 +6,9 @@ namespace TestLatviaProject.Dtos
     public class UserAdminDto
     {
         public int? Id { get; set; }
-        public IEnumerable<SelectListItem>? UsersList { get; set; }
+        public ICollection<SelectListItem>? UsersList { get; set; }
         public string? UserName { get; set; }
-        public IEnumerable<Tasks>? AllTasks { get; set; }
-        public IEnumerable<string>? TasksTitle { get; set; }
+        public ICollection<Tasks>? AllTasks { get; set; }
+        public ICollection<string>? TasksTitle { get; set; }
     }
 }

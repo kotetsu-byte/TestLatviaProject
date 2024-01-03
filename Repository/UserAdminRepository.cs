@@ -14,7 +14,7 @@ namespace TestLatviaProject.Repository
             _context = context;
         }
 
-        public async Task<IEnumerable<UserAdmin>> GetAllUserAdmins()
+        public async Task<ICollection<UserAdmin>> GetAllUserAdmins()
         {
             return await _context.UserAdmins.ToListAsync();
         }
@@ -24,12 +24,12 @@ namespace TestLatviaProject.Repository
             return await _context.UserAdmins.Where(ua => ua.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<User>> GetAllUsers()
+        public async Task<ICollection<User>> GetAllUsers()
         {
             return await _context.Users.ToListAsync();
         }
 
-        public async Task<IEnumerable<Tasks>> GetAllTasks()
+        public async Task<ICollection<Tasks>> GetAllTasks()
         {
             return await _context.Tasks.ToListAsync();
         }

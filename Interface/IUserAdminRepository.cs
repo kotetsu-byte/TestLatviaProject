@@ -4,10 +4,10 @@ namespace TestLatviaProject.Interface
 {
     public interface IUserAdminRepository
     {
-        Task<IEnumerable<UserAdmin>> GetAllUserAdmins();
+        Task<ICollection<UserAdmin>> GetAllUserAdmins();
         Task<UserAdmin> GetUserAdminById(int id);
-        Task<IEnumerable<User>> GetAllUsers();
-        Task<IEnumerable<Tasks>> GetAllTasks();
+        Task<ICollection<User>> GetAllUsers();
+        Task<ICollection<Tasks>> GetAllTasks();
         bool Create(UserAdmin userAdmin);
         bool Update(UserAdmin userAdmin);
         bool Delete(int id);

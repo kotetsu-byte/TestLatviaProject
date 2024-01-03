@@ -15,9 +15,9 @@
         </tr>
         @foreach (var item in Model.AllTasks)
         {
-            <tr>
-                <td><input class="check-@item.Id" type="checkbox" onclick="addToTask('@item.Title', @item.Id)" /></td>
-                <td>@item.Title</td>
+            <tr class="task">
+                <td><input id="check-@item.Id" class="check" type="checkbox" onclick="addToTask('@item.Title', @item.Id)" /></td>
+                <td class="task-name">@item.Title</td>
             </tr>
         }
     </table>
@@ -27,9 +27,26 @@
 </form>
 
 <script>
-    let arr = [];
+    var arr = [];
+    window.onload = function() {
+        var str = '@String.Join(", ", Model.TasksTitle)';
+        arr = str.split(',')
+        console.log(arr);
+        var tasks = document.querySelectorAll('.task');
+        tasks.forEach(task => {
+            var check = task.querySelector(".check");
+            var taskName = task.querySelector(".task-name").innerHTML;
+            arr.forEach(elem => {
+                if (elem == taskName) { 
+                    check.checked = true;
+                }
+            })
+        });
+        checkIfEmpty();
+    }
+
     function addToTask(str, id) {
-        let check = document.querySelector(`.check-${id}`);
+        let check = document.querySelector(`#check-${id}`);
         if (check.checked) {
             arr.push(str);
         } else {
